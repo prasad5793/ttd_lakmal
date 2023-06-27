@@ -1,0 +1,29 @@
+*********************************************************************************************
+APPLICATION FOR REPATRIATION / DEPORTATION
+**********************************************************************************************
+
+this system run on server so if your system occer any error please chack that your server is running (WAMP Server )
+
+
+UN - admins
+PW - admin1234
+    *can change via System -(Add user)
+
+> All Applicant
+> Current Applicant
+> Past Applicant
+> Add Applicant
+
+> Add User
+> Settings
+> Sign out
+**********************************************************************************************
+for modification email or call 
+email- airportprasad@gmail.com
+whatsApp - +94 716830344
+
+
+System file location
+C:\wamp64\www\slemb
+
+
