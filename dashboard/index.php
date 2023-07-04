@@ -4,6 +4,7 @@
     include('../phpclasses/pagination.php');
 
     $limit = 10;
+	$filename= 'aaaaaaa';
 	    
 	//get number of rows
 	$queryNum = $db_connect->query("SELECT COUNT(*) as postNum FROM sharp_emp LIMIT $limit");
@@ -34,7 +35,7 @@
 			<li class="nav-item"><a href="../dashboard/current_employees.php"><span class="nav-icon"><i class="fa fa-check"></i></span>Processing Applications</a></li>
 			<li class="nav-item"><a href="../dashboard/past_employees.php"><span class="nav-icon"><i class="fa fa-times"></i></span>submitted Applications</a></li>
 			<li class="nav-item"><a href="../dashboard/qr.php"><span class="nav-icon"><i class="fa fa-times"></i></span>QR Code</a></li>
-			<li class="nav-item"><a href="../dashboard/TCPDF-main/examples/example_051.php"><span class="nav-icon"><i class="fa fa-times"></i></span>TTD New QR</a></li>
+			<li class="nav-item"><a href="../dashboard/examples/example_051.php"><span class="nav-icon"><i class="fa fa-times"></i></span>TTD New QR</a></li>
 			
 			<?php if($usertype == "Admin"){ ?>
 				<li class="nav-item"><a href="../dashboard/add_employee.php"><span class="nav-icon"><i class="fa fa-user-plus"></i></span>Add Applicant</a></li>
@@ -194,6 +195,7 @@
 					<div class="printbtn_wrapper">
 						<span class="printbtn"> Print</span>
 					</div>
+					<div class="emp_column emp_id"><img width=175px height=175px src="../temp/<?php echo $filename; ?>.png"></div>
 				</div>
 			</div>
 		</div>

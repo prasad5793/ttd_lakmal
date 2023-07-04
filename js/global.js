@@ -395,6 +395,7 @@ $(document).ready(function(){
 
 
     	if(firstnameerror == "" && middlenameerror == "" && lastnameerror == "" && phoneerror == "" && jobtypeerror == "" && dateemployederror == "" && resaddresserror == "" && reslocationerror == "" && gpsreslocationerror == "" && resdirectionerror == "" && photoerror == "" && IDnumbererror == "" && fullnameerror == "" && idtypeerror == "" && nationalIDerror == "" && relationshiperror == "" && kinphoneerror == "" && kinresaddresserror == "" && kinresdirectionerror == "" && empstatuserror == "") {
+		//	if(firstnameerror ==  "" && resdirectionerror  "" ) {
 
     		$(".displaySuccess").css({
     			"margin-top":"0px",

@@ -2,6 +2,35 @@
 
 // Include the main TCPDF library (search for installation path).
 require_once('tcpdf_include.php');
+include('../../libs/phpqrcode/qrlib.php'); 
+$f = "../../dashboard/visit.php";
+if(!file_exists($f)){
+	touch($f);
+	$handle =  fopen($f, "w" ) ;
+	fwrite($handle,0) ;
+	fclose ($handle);
+}
+ 
+
+
+function getUsernameFromEmail($email) {
+	//$find = '@';
+	//$pos = strpos($email, $find);
+	//$username = substr($email, 0, $pos);
+	$username = $email;
+	return $username;
+}
+
+if(isset($_POST['submit']) ) {
+	$tempDir = '../dashboard/temp/'; 
+	$email = $_POST['mail'];
+	$subject =  $_POST['subject'];
+	$filename = getUsernameFromEmail($email);
+	$body =  $_POST['msg'];
+	$codeContents = "\nApp No- ".$email."\nName- ".$subject." \nPassport No- ".$body;
+	//$codeContents = 'mailto:'.$email.'?subject='.urlencode($subject).'&body='.urlencode($body); 
+	QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);
+}
 
 
 // Extend the TCPDF class to create custom Header and Footer
@@ -55,8 +84,8 @@ $pdf->setAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-	require_once(dirname(__FILE__).'/lang/eng.php');
+if (@file_exists(dirname(__FILE__).'../dashboard/TCPDF-main/lang/eng.php')) {
+	require_once(dirname(__FILE__).'../dashboard/TCPDF-main/lang/eng.php');
 	$pdf->setLanguageArray($l);
 }
 

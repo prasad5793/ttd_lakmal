@@ -15,10 +15,11 @@
 			<h4>APPLICATION FOR REPATRIATION / DEPORTATION </h4>
 		</div>
 		<ul class="nav">
-			<li class="nav-item"><a href="../dashboard"><span class="nav-icon"><i class="fa fa-users"></i></span>All Applicant</a></li>
+		<li class="nav-item current"><a href="../dashboard"><span class="nav-icon"><i class="fa fa-users"></i></span>All Applicant</a></li>
 			<li class="nav-item"><a href="../dashboard/current_employees.php"><span class="nav-icon"><i class="fa fa-check"></i></span>Processing Applications</a></li>
 			<li class="nav-item"><a href="../dashboard/past_employees.php"><span class="nav-icon"><i class="fa fa-times"></i></span>submitted Applications</a></li>
-			<li class="nav-item"><a href="../dashboard/qr.php"><span class="nav-icon"><i class="fa fa-user-plus"></i></span>QR Code Generate</a></li>
+			<li class="nav-item"><a href="../dashboard/qr.php"><span class="nav-icon"><i class="fa fa-times"></i></span>QR Code</a></li>
+			<li class="nav-item"><a href="../dashboard/TCPDF-main/examples/example_051.php"><span class="nav-icon"><i class="fa fa-times"></i></span>TTD New QR</a></li>
 			<?php if($usertype == "Admin"){ ?>
 				<li class="nav-item current"><a href="../dashboard/add_employee.php"><span class="nav-icon"><i class="fa fa-user-plus"></i></span>Add Applicant</a></li>
 <br/><br/><br/>
@@ -51,9 +52,10 @@ if(!file_exists($f)){
 
 
 function getUsernameFromEmail($email) {
-	$find = '@';
-	$pos = strpos($email, $find);
-	$username = substr($email, 0, $pos);
+	//$find = '@';
+	//$pos = strpos($email, $find);
+	//$username = substr($email, 0, $pos);
+	$username = $email;
 	return $username;
 }
 
@@ -63,7 +65,8 @@ if(isset($_POST['submit']) ) {
 	$subject =  $_POST['subject'];
 	$filename = getUsernameFromEmail($email);
 	$body =  $_POST['msg'];
-	$codeContents = 'mailto:'.$email.'?subject='.urlencode($subject).'&body='.urlencode($body); 
+	$codeContents = "\nApp No- ".$email."\nName- ".$subject." \nPassport No- ".$body;
+	//$codeContents = 'mailto:'.$email.'?subject='.urlencode($subject).'&body='.urlencode($body); 
 	QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);
 }
 ?>
@@ -75,16 +78,16 @@ if(isset($_POST['submit']) ) {
 				<h3>Please Fill-out All Fields</h3>
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
 					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" name="mail" style="width:20em;" placeholder="Enter your Email" value="<?php echo @$email; ?>" required />
+						<label>Application No</label>
+						<input type="text" class="form-control" name="mail" style="width:20em;" placeholder="Application No" value="<?php echo @$email; ?>" required />
 					</div>
 					<div class="form-group">
-						<label>Subject</label>
-						<input type="text" class="form-control" name="subject" style="width:20em;" placeholder="Enter your Email Subject" value="<?php echo @$subject; ?>" required pattern="[a-zA-Z .]+" />
+						<label>Name</label>
+						<input type="text" class="form-control" name="subject" style="width:20em;" placeholder="Applicant Name" value="<?php echo @$subject; ?>" required pattern="[a-zA-Z .]+" />
 					</div>
 					<div class="form-group">
-						<label>Message</label>
-						<input type="text" class="form-control" name="msg" style="width:20em;" value="<?php echo @$body; ?>" required pattern="[a-zA-Z0-9 .]+" placeholder="Enter your message"></textarea>
+						<label>Passport No</label>
+						<input type="text" class="form-control" name="msg" style="width:20em;" value="<?php echo @$body; ?>" required pattern="[a-zA-Z0-9 .]+" placeholder="Passport No"></textarea>
 					</div>
 					<div class="form-group">
 						<input type="submit" name="submit" class="btn btn-primary submitBtn" style="width:20em; margin:0;" />

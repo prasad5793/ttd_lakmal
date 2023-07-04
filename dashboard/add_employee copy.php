@@ -1,44 +1,11 @@
 <?php
 	include("../inc/header.php");
-    include('../libs/phpqrcode/qrlib.php'); 
 										    
 	if($usertype != "Admin"){
         header("Location: ../dashboard");
     }
 
 ?>
-<?php
-$f = "visit.php";
-if(!file_exists($f)){
-	touch($f);
-	$handle =  fopen($f, "w" ) ;
-	fwrite($handle,0) ;
-	fclose ($handle);
-}
- 
-
-
-function getUsernameFromEmail($email) {
-	//$find = '@';
-	//$pos = strpos($email, $find);
-	//$username = substr($email, 0, $pos);
-	$username = $email;
-	return $username;
-}
-
-if(isset($_POST['submit']) ) {
-	$tempDir = '../temp/'; 
-	$email = $_POST['mail'];
-	$subject =  $_POST['subject'];
-	$filename = getUsernameFromEmail($email);
-	$body =  $_POST['msg'];
-	$codeContents = "\nApp No- ".$email."\nName- ".$subject." \nPassport No- ".$body;
-	//$codeContents = 'mailto:'.$email.'?subject='.urlencode($subject).'&body='.urlencode($body); 
-	QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);
-}
-?>
-
-
 	<section class="side-menu fixed left">
 	<div class="dash_logo">
 		<img src="../images/logo.png" alt="Applicant Record System" style="width:200px;height:250px;">
@@ -72,11 +39,11 @@ if(isset($_POST['submit']) ) {
 				<div class="section_title">APPLICATION FOR REPATRIATION / DEPORTATION <br/>Add Applicant</div>
 				
 				
-				<form id="addemployee" class="clearfix" method="post" action="">
+				<form id="addemployee" class="clearfix" method="" action="">
 					<div class="section_subtitle">Personal Data</div>
 					<div class="input-box input-small left">
 						<label for="employee_id">Registration No</label><br>
-						<input type="text" class="inputField emp_id" placeholder="Optional" name="employee_id" value="<?php echo @$email; ?>">
+						<input type="text" class="inputField emp_id" placeholder="Optional" name="employee_id" value="OUT/">
 						<div class="error empiderror"></div>
 					</div>
 
@@ -243,63 +210,12 @@ if(isset($_POST['submit']) ) {
 						<input type="hidden" class="inputField kinresdirection" name="kinresdirection" value="1111"></input>
 				<!--		<div class="error kinresdirectionerror"></div>
 					</div>-->
-
-					
-
-
 					<div class="input-box">
 						<button type="submit" class="submitField">Add record</button>
 					</div>
 				</form>
-			
-
-
-			</br></br></br></br>
-
-			
-				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
-
-				<div class="input-box input-small left">
-					<label for="lastname">Application No</label><br>
-						<input type="text" class="inputField lastname" name="mail"  placeholder="Application No" value="<?php echo @$email; ?>" />
-					</div>
-
-					<div class="input-box input-small right">
-					<label for="lastname">Name</label><br>
-						<input type="text" class="inputField lastname" name="subject"  placeholder="Applicant Name" value="<?php echo @$subject; ?>" required pattern="[a-zA-Z .]+" />
-					</div>
-					<div class="input-box input-small left">
-					<label for="lastname">Passport No</label><br>
-						<input type="text" class="inputField lastname" name="msg"  value="<?php echo @$body; ?>" required pattern="[a-zA-Z0-9 .]+" placeholder="Passport No" > 
-			</div>
-					
-						<div class="input-box">
-						<button type="submit" class="submitField">QR Generate</button>
-					</div>
-					
-				</form>
-			</div>
-
-
-			<?php
-			if(!isset($filename)){
-				$filename = "author";
-			}
-			?>
-			<div class="qr-field">
-				<center>
-					<div class="qrframe" style="border:2px solid black; width:210px; height:210px;">
-							<?php echo '<img src="../temp/'. @$filename.'.png" style="width:200px; height:200px;"><br>'; ?>
-					</div>
-					<a class="btn btn-primary submitBtn" style="width:210px; margin:5px 0;" href="download.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
-				</center>
-			</div>
-				
 			</div>
 		</div>
-		</div>
-		</div>
-
 	</section>
 <script type="text/javascript" src="../js/global.js"></script>
 </body>

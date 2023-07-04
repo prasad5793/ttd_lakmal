@@ -6,6 +6,7 @@
     include('../inc/header.php');
 
     $action = mysqli_real_escape_String($db_connect, $_POST['action']);
+    $filename= 'aaaaaaa';
 
     if($action == "retrieve"){    
         $record_id = mysqli_real_escape_String($db_connect, $_POST['record_id']);
@@ -47,6 +48,7 @@
                 echo '<table class="table">
                         <tr class="table_row logo">
                             <td class="table_column logo">
+                            <div class="emp_column emp_ida"><img width=175px height=175px src="../temp/'.$filename.'.png"></div>
                             <img src="../images/logo_HE.jpg">
                             <h3>Temporary Travel Document Application</h3>
                             </td>
